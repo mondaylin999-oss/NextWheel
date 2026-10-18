@@ -94,3 +94,5 @@ This is a static snapshot of published Myanmar asking prices, not a live feed or
 | 2023 Hongqi EQM5 | 1850 | 185,000,000 | [CarsDB](https://www.carsdb.com/en/car-listings/2023-hongqi-eqm5-775330) |
 
 Mazda and Ford prices were read from CarsDB search/home listing summaries; their individual detail pages could not be fetched during research. All other prices were also checked on the individual listing pages. Source edit ages are retained where available in src/inventory.js.
+
+Appearance: open the header Settings button to choose Light / day, Dark / night, or System preference. The choice persists in browser storage; System follows operating-system theme changes.
