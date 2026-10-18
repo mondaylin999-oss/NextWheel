@@ -76,3 +76,7 @@
 @media (prefers-reduced-motion: reduce) {
   .image-skeleton::after { animation: none; transform: none; background: none; }
 }
+
+.price-source{display:block;margin-top:12px;color:var(--blue);font-size:10px;line-height:1.6}.price-research-note{font-size:11px;line-height:1.8;color:var(--muted)}.price-research-note a{color:var(--blue)}.car-title-row{flex-wrap:wrap}.price{font-size:15px;white-space:normal;overflow-wrap:anywhere}.detail-price strong{white-space:normal;overflow-wrap:anywhere}
+
+.source-date{display:block;font-size:9px;color:var(--muted);line-height:1.6;margin-top:3px}

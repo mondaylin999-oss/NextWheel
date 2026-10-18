@@ -1,3 +1,4 @@
+import { inventory } from './src/inventory.js';
 import express from 'express';
 import cors from 'cors';
 import path from 'node:path';
@@ -8,16 +9,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.disable('x-powered-by');
 app.use(cors());
 app.use(express.json({ limit: '12mb' }));
-
-// Demo in-memory inventory. Replace with a database before production.
-const inventory = [
-  { id: 1, year: 2021, make: 'Honda', model: 'Civic EX', price: 21800, mileage: 28400, aiScore: 96 },
-  { id: 2, year: 2020, make: 'Toyota', model: 'RAV4 XLE', price: 26400, mileage: 41200, aiScore: 92 },
-  { id: 3, year: 2022, make: 'Mazda', model: 'CX-5 Touring', price: 23950, mileage: 19600, aiScore: 89 },
-  { id: 4, year: 2019, make: 'BMW', model: '330i Sport', price: 22700, mileage: 48700, aiScore: 83 },
-  { id: 5, year: 2021, make: 'Hyundai', model: 'Tucson SEL', price: 20400, mileage: 32200, aiScore: 91 },
-  { id: 6, year: 2020, make: 'Tesla', model: 'Model 3 Long Range', price: 24900, mileage: 36500, aiScore: 87 }
-];
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'AutoMatch AI API' }));
 app.get('/api/cars', (req, res) => {

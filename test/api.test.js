@@ -10,8 +10,18 @@ test('API health, inventory, validation and draft creation', async () => {
   const post = body => fetch(base + '/api/listings', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   try {
     assert.equal((await (await get('/api/health')).json()).ok, true);
-    const cars = await (await get('/api/cars?make=Honda&maxPrice=25000&minScore=90')).json();
+    const cars = await (await get('/api/cars?make=Honda&maxPrice=300000000&minScore=90')).json();
     assert.equal(cars.count, 1);
+    assert.equal(cars.data[0].price, 280000000);
+    assert.equal(cars.data[0].sourceLakhs * 100000, cars.data[0].price);
+    assert.equal(cars.data[0].currency, 'MMK');
+    const inventory = await (await get('/api/cars')).json();
+    assert.equal(inventory.count, 6);
+    for (const car of inventory.data) {
+      assert.equal(car.price, car.sourceLakhs * 100000);
+      assert.equal(new URL(car.sourceUrl).hostname, 'www.carsdb.com');
+    }
+    assert.equal((await (await get('/api/cars?maxPrice=200000000')).json()).count, 2);
     assert.equal((await get('/api/cars/999')).status, 404);
     assert.equal((await get('/api/missing')).status, 404);
     for (const query of ['maxPrice=no','minScore=101','maxPrice=-1','minScore=']) assert.equal((await get('/api/cars?' + query)).status, 400);
