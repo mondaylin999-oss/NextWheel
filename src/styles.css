@@ -46,3 +46,33 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Photo placeholders reserve the existing image area while requests load. */
+.image-skeleton, .image-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #e9eef5;
+  color: #94a3b8;
+  pointer-events: none;
+  overflow: hidden;
+}
+.image-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, #ffffff80 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+.image-fallback { font-size: 11px; }
+@keyframes skeleton-shimmer {
+  to { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .image-skeleton::after { animation: none; transform: none; background: none; }
+}
