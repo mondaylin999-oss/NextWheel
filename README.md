@@ -77,3 +77,5 @@ update the proxy in `vite.config.js` too.
 Generated files, dependencies, logs, and local environment secrets are excluded by
 `.gitignore`. Commit the lockfile so installs are reproducible. Configure the desired
 GitHub remote before pushing. No remote URL is included in this project.
+
+All prices, budget filters, and listing drafts use Myanmar kyat (MMK). Sample numeric amounts are illustrative; this currency change does not apply an exchange-rate conversion. Previously saved drafts without an MMK currency marker require re-entering the asking price.

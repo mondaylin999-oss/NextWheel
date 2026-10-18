@@ -30,12 +30,12 @@ app.get('/api/cars', (req, res) => {
   if (req.query.make) results = results.filter(car => car.make.toLowerCase() === String(req.query.make).toLowerCase());
   if (req.query.maxPrice) results = results.filter(car => car.price <= Number(req.query.maxPrice));
   if (req.query.minScore) results = results.filter(car => car.aiScore >= Number(req.query.minScore));
-  res.json({ count: results.length, data: results });
+  res.json({ currency: 'MMK', count: results.length, data: results });
 });
 app.get('/api/cars/:id', (req, res) => {
   const car = inventory.find(item => item.id === Number(req.params.id));
   if (!car) return res.status(404).json({ error: 'Vehicle not found' });
-  res.json(car);
+  res.json({ ...car, currency: 'MMK' });
 });
 app.post('/api/listings', (req, res) => {
   const { year, make, model, mileage, price } = req.body || {};
@@ -46,7 +46,7 @@ app.post('/api/listings', (req, res) => {
       (price !== undefined && price !== null && (!numeric(price) || Number(price) <= 0))) {
     return res.status(400).json({ error: 'Provide a valid year, make, model, non-negative whole-number mileage, and optional positive price' });
   }
-  const listing = { id: Date.now(), year: Number(year), make: make.trim(), model: model.trim(), mileage: Number(mileage), price: Number(price) || null, status: 'draft', createdAt: new Date().toISOString() };
+  const listing = { currency: 'MMK', id: Date.now(), year: Number(year), make: make.trim(), model: model.trim(), mileage: Number(mileage), price: Number(price) || null, status: 'draft', createdAt: new Date().toISOString() };
   // Demo only: no persistence. Add auth, validation, storage, and moderation for production.
   res.status(201).json({ message: 'Draft created in demo mode', data: listing });
 });
